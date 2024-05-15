@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div class="box">
+            <div class="score">
+                <h2>hit</h2>
+                <div class="s-box" id="hit">5</div>
+            </div>
+
+            <div class="score">
+                <h2>timer</h2>
+                <div class="s-box" id="timervalue">60</div>
+            </div>
+
+
+            <div class="score">
+                <h2>score</h2>
+                <div class="s-box" id="score">0</div>
+            </div>
+
+        </div>
+        <div class="bottom">
+            <!-- <div class="bubble">5</div> -->
+        </div>
+    </main>
+
+
+
+
+    <script >
+
+        function makebubble(){
+ let clutter =" ";
+  for (let i = 0; i<= 79; i++) {
+    let rn = Math.floor(Math.random()*10)
+    clutter += ` <div class="bubble">${rn}</div>`;
+    
+  }
+ document.querySelector('.bottom').innerHTML=clutter;
+}
+makebubble();
+
+ let timer = 60;
+function runTimer(){
+   let timerint = setInterval(function () {
+     if(timer > 0){
+     
+        timer--;
+     
+     document.querySelector("#timervalue") . textContent = timer;
+    }
+     else{
+        clearInterval(timerint);
+        document.querySelector(".bottom") .innerHTML = `<h2>Game Over!</h2>`
+     }
+    },1000)
+}
+runTimer();
+
+let hitrn = 0;
+function getNewHit(){
+
+  hitrn =   Math.floor(Math.random()*10);
+ document.querySelector("#hit"). textContent = hitrn;
+}
+
+getNewHit();
+
+let score = 0;
+ function increaseScore(){
+    score += 10;
+    document.querySelector("#score")
+    . textContent = score;
+
+ }
+
+  document.querySelector(".bottom") .addEventListener("click", function (dets){
+    let Clickednum = Number(dets.target.textContent);
+    if(Clickednum === hitrn){
+    makebubble();
+    increaseScore();
+    getNewHit();
+
+
+    }
+
+ })
+ 
+    </script>
+</body>
+</html>
